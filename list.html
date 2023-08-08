@@ -47,11 +47,22 @@
             .random-button {
                 margin-top: 20px;
             }
+            
+            .import-data {
+                margin: 20px;
+            }
         </style>
     </head>
 
     <body>
         <div class="container">
+
+            <!-- Div para importar os dados -->
+            <div class="import-data">
+                <h2>Importar Dados</h2>
+                <button class="btn btn-primary" id="importBtn">Importar Dados de Frutas do Diabo</button>
+            </div>
+
             <!-- Div 1 -->
             <div class="left-column">
                 <div class="akuma-form">
@@ -121,23 +132,16 @@
 
         <script>
             $(document).ready(function() {
-                // Função para carregar as frutas do banco de dados
-                function loadAkumaDatabase() {
-                    $.ajax({
-                        url: "get_fruits.php", // Arquivo PHP para obter as frutas do banco de dados
-                        type: "GET",
-                        success: function(response) {
-                            $("#akumaDatabase").html(response);
-                        },
-                        error: function(xhr, status, error) {
-                            // Lida com erros, se ocorrerem
-                            console.log("Erro ao obter frutas: " + error);
-                        }
-                    });
-                }
 
-                // Chame a função para carregar as frutas quando a página carregar
-                loadAkumaDatabase();
+                // Captura o evento de clique do botão "Importar Dados de Frutas do Diabo"
+                $("#importBtn").click(function() {
+                    importDevilFruits();
+                });
+
+                // Captura o evento de clique do botão "Sortear"
+                $("#randomBtn").click(function() {
+                    randomAkuma();
+                });
 
                 // Captura o evento de clique do botão "Adicionar ao Banco de Dados"
                 $("#addBtn").click(function() {
@@ -170,6 +174,40 @@
                     });
                 });
 
+
+                // Função para importar os dados
+                function importDevilFruits() {
+                    $.ajax({
+                        url: "import_fruits.php",
+                        type: "GET",
+                        success: function(response) {
+                            // Atualize a lista de frutas após a importação
+                            loadAkumaDatabase();
+                            alert(response); // Exemplo: exibe uma mensagem de sucesso
+                        },
+                        error: function(xhr, status, error) {
+                            alert("Erro ao importar dados: " + error); // Exemplo: exibe uma mensagem de erro
+                        }
+                    });
+                }
+
+                // Função para carregar as frutas do banco de dados
+                function loadAkumaDatabase() {
+                    $.ajax({
+                        url: "get_fruits.php", // Arquivo PHP para obter as frutas do banco de dados
+                        type: "GET",
+                        success: function(response) {
+                            $("#akumaDatabase").html(response);
+                        },
+                        error: function(xhr, status, error) {
+                            // Lida com erros, se ocorrerem
+                            console.log("Erro ao obter frutas: " + error);
+                        }
+                    });
+                }
+
+                // Chame a função para carregar as frutas quando a página carregar
+                loadAkumaDatabase();
 
                 function randomAkuma() {
                     var selectedCategories = [];
@@ -210,10 +248,6 @@
                 // Chame a função para carregar as frutas quando a página carregar
                 loadAkumaDatabase();
 
-                // Captura o evento de clique do botão "Sortear"
-                $("#randomBtn").click(function() {
-                    randomAkuma();
-                });
             });
         </script>
 
