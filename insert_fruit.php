@@ -19,4 +19,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insira a DevilFruit no banco de dados
     insertDevilFruit($devilFruit, $conn); // Passando a conexão como parâmetro
 }
-?>

@@ -24,8 +24,9 @@ function insertDevilFruit($devilFruit, $conn)
     $meaning = $devilFruit->getMeaning();
     $currentUser = $devilFruit->getCurrentUser();
     $picture = $devilFruit->getPicture();
+    $categoria = $devilFruit->getCategoria(); // Novo parâmetro
 
-    $sql = "INSERT INTO devil_fruits (name, meaning, currentUser, picture) VALUES ('$name', '$meaning', '$currentUser', '$picture')";
+    $sql = "INSERT INTO devil_fruits (name, meaning, currentUser, picture, categoria) VALUES ('$name', '$meaning', '$currentUser', '$picture', '$categoria')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Nova Devil Fruit adicionada com sucesso!";
@@ -35,6 +36,7 @@ function insertDevilFruit($devilFruit, $conn)
 
     $conn->close();
 }
+
 
 // Exemplo de método para buscar uma DevilFruit do banco de dados por nome
 function getDevilFruitByName($name)
