@@ -16,6 +16,10 @@ if ($result->num_rows > 0) {
                         <p class="card-text">' . $row["meaning"] . '</p>
                         <p class="akuma-type">Categoria: ' . $row["categoria"] . '</p>
                         <p class="akuma-type">Usuário Atual: ' . $row["currentUser"] . '</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="edit_fruit.php?id=' . $row["id"] . '" class="btn btn-primary">Editar</a>
+                            <button class="btn btn-danger delete-button" data-id="' . $row["id"] . '">Excluir</button>
+                        </div>
                     </div>
                 </div>
             </div>';
@@ -25,4 +29,3 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close(); // Feche a conexão com o banco de dados
-?>
